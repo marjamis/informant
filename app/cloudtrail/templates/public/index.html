@@ -1,7 +1,7 @@
-{% load staticfiles %}
+{% load static %}
 
 {# Load the tag library #}
-{% load bootstrap3 %}
+{% load django_bootstrap5 %}
 
 {% load custom_tags %}
 
@@ -74,11 +74,7 @@
           <form action="/results/" method="GET" class="form">
             {% csrf_token %}
             {% bootstrap_form timeform %}
-            {% buttons %}
-            <button type="submit" class="btn btn-primary">
-            Submit
-            </button>
-            {% endbuttons %}
+            {% bootstrap_button Submit button_type="submit" button_class="btn btn-primary" %}
           </form>
         </div>
         <div id="menu1" class="tab-pane fade">
@@ -87,11 +83,7 @@
           <form action="/results/" method="POST" class="form" enctype="multipart/form-data">
             {% csrf_token %}
             {% bootstrap_form locationform %}
-            {% buttons %}
-            <button type="submit" class="btn btn-primary">
-            Submit
-            </button>
-            {% endbuttons %}
+            {% bootstrap_button Submit button_type="submit" button_class="btn btn-primary" %}
           </form>
         </div>
         <div id="menu2" class="tab-pane fade">
@@ -106,4 +98,3 @@
     </div>
   </body>
 </html>
-
