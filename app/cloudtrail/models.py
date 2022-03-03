@@ -1,8 +1,6 @@
 from datetime import datetime
 from django.db import models
 
-# Create your models here.
-
 
 class Searches(models.Model):
     # django automatically adds a primary key of name id

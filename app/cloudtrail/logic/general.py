@@ -1,40 +1,38 @@
 from cloudtrail.models import Searches
 
-# Checks if a search key already exists, returns True or False a result
-
 
 def searchKeyExists(searchKey):
+    """Checks if a search key already exists, returns True or False a result."""
+
     try:
         Searches.objects.get(search_key=searchKey)
         return True
     except:
         return False
 
-# Queries the Searches database and returns the ID's in reverse order
-
 
 def recents():
+    """Queries the Searches database and returns the ID's in reverse order."""
     return Searches.objects.order_by('id').reverse()
-
-# Returns a dictionary of the relevant details for a search key
 
 
 def details(searchKey):
+    """Returns a dictionary of the relevant details for a search key."""
     data = Searches.objects.get(search_key=searchKey)
 
-    details = {}
-    details['searchKey'] = data.search_key
-    details['account'] = data.account
-    details['location'] = data.location
-    details['dateRun'] = data.search_date
-    details['dateFor'] = data.data_date
+    details = {
+        'searchKey':     data.search_key,
+        'account':    data.account,
+        'location':     data.location,
+        'dateRun':    data.search_date,
+        'dateFor':    data.data_date,
+    }
 
     return details
 
-# Saves a search into the database
-
 
 def saveSearch(searchKey, account, data_date):
+    """Saves a search into the database."""
     entry = Searches(search_key=searchKey,
                      account=account,
                      location=searchKey,
