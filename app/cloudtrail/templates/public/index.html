@@ -6,37 +6,31 @@
 {% load custom_tags %}
 
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Informant</title>
-    {# Load CSS and JavaScript #}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-    {# Display django.contrib.messages as Bootstrap alerts #}
-    {% bootstrap_messages %}
-    <!-- Custom CSS -->
-    <link href="{% static 'public/dist/css/sb-admin-2.css' %}" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="{% static 'public/bower_components/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
-    <!-- jQuery -->
-    <script src="{% static 'public/bower_components/jquery/dist/jquery.min.js' %}"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{% static 'public/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
-  </head>
-  <body>
-    <div id="wrapper">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Informant</title>
+  {# Load CSS and JavaScript #}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+  {# Display django.contrib.messages as Bootstrap alerts #}
+  {% bootstrap_messages %}
+</head>
+
+<body>
+  <div id="wrapper">
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="/">marjamis@informant</a>
       </div>
@@ -58,43 +52,53 @@
       <div class="row">
         <div class="col-lg-12">
           <h1 class="page-header">Process data</h1>
-           The current time is: {% current_time "%Y-%m-%d %I:%M %p" %} UTC
+          The current time is: {% current_time "%Y-%m-%d %I:%M %p" %} UTC
         </div>
         <!-- /.col-lg-12 -->
       </div>
-      <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#home">Download</a></li>
-        <li><a data-toggle="tab" href="#menu1">Load</a></li>
-        <li><a data-toggle="tab" href="#menu2">Previous</a></li>
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab"
+            aria-controls="home" aria-selected="true">Download</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="load-tab" data-bs-toggle="tab" data-bs-target="#load" type="button" role="tab"
+            aria-controls="load" aria-selected="false">Load</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="previous-tab" data-bs-toggle="tab" data-bs-target="#previous" type="button" role="tab"
+            aria-controls="previous" aria-selected="false">Previous</a>
+        </li>
       </ul>
-      <div class="tab-content">
-        <div id="home" class="tab-pane fade in active">
+      <div class="tab-content" id="tab-menu">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
           <h3>Download</h3>
           {# Display a form #}
           <form action="/results/" method="GET" class="form">
             {% csrf_token %}
             {% bootstrap_form timeform %}
-            {% bootstrap_button Submit button_type="submit" button_class="btn btn-primary" %}
+            {% bootstrap_button content="Submit" button_type="submit" button_class="btn btn-primary" %}
           </form>
         </div>
-        <div id="menu1" class="tab-pane fade">
-          <h3>Load</h3>
-          {# Display a form #}
-          <form action="/results/" method="POST" class="form" enctype="multipart/form-data">
-            {% csrf_token %}
-            {% bootstrap_form locationform %}
-            {% bootstrap_button Submit button_type="submit" button_class="btn btn-primary" %}
-          </form>
-        </div>
-        <div id="menu2" class="tab-pane fade">
-          <h3>Previous</h3>
-          <ul>
-            {% for value in recent_searches %}
-            <li> <a href="/results/?prev={{value}}">{{ value }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
+        <div class="tab-pane fade" id="load" role="tabpanel" aria-labelledby="load-tab">
+        <h3>Load</h3>
+        {# Display a form #}
+        <form action="/results/" method="POST" class="form" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% bootstrap_form locationform %}
+          {% bootstrap_button content="Submit" button_type="submit" button_class="btn btn-primary" %}
+        </form>
+      </div>
+      <div class="tab-pane fade" id="previous" role="tabpanel" aria-labelledby="previous-tab">
+        <h3>Previous</h3>
+        <ul>
+          {% for value in recent_searches %}
+          <li> <a href="/results/?prev={{value}}">{{ value }}</a></li>
+          {% endfor %}
+        </ul>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
