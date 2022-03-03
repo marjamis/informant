@@ -21,6 +21,8 @@ prod: ## Runs the prod version of the application
 	docker run -dit -e ENV=prod --network=host $(IMAGE)
 
 dev: ## Runs a dev version of the application
-	docker run --rm -it -e ENV=test --network=host $(IMAGE)
+	docker run --name informant --rm -it -e ENV=test --network=host $(IMAGE)
 
 clean: ## Cleans up any old/unneeded items
+	-docker stop informant
+	-docker rm informant

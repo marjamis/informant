@@ -21,10 +21,6 @@
       <a class="nav-link" id="load-tab" data-bs-toggle="tab" data-bs-target="#load" type="button" role="tab"
         aria-controls="load" aria-selected="false">Load</a>
     </li>
-    <li class="nav-item" role="presentation">
-      <a class="nav-link" id="previous-tab" data-bs-toggle="tab" data-bs-target="#previous" type="button" role="tab"
-        aria-controls="previous" aria-selected="false">Previous</a>
-    </li>
   </ul>
   <div class="tab-content" id="tab-menu">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -44,14 +40,6 @@
         {% bootstrap_form locationform %}
         {% bootstrap_button content="Submit" button_type="submit" button_class="btn btn-primary" %}
       </form>
-    </div>
-    <div class="tab-pane fade" id="previous" role="tabpanel" aria-labelledby="previous-tab">
-      <h3>Previous</h3>
-      <ul>
-        {% for value in recent_searches %}
-        <li> <a href="/results/?prev={{value}}">{{ value }}</a></li>
-        {% endfor %}
-      </ul>
     </div>
   </div>
 </div>

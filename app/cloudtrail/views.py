@@ -62,14 +62,16 @@ def results(request):
     dataCounted = viewGeneration.graphCallGen(output, graphList, subsetList)
 
     # Returns all the relevant data to the Template
-    return render(request, 'public/results.html', {'details': general.details(searchKey),
-                                                   'subset_headers': subsetList,
-                                                   'subset_calls':  dataCounted['calls'],
-                                                   'pieData': [viewGeneration.graphFormatter(dataCounted['eventName']),
+    return render(request, 'public/results.html', {
+        'details': general.details(searchKey),
+        'recent_searches': general.recents(),
+        'subset_headers': subsetList,
+        'subset_calls':  dataCounted['calls'],
+        'pieData': [viewGeneration.graphFormatter(dataCounted['eventName']),
                   viewGeneration.graphFormatter(dataCounted['eventSource']),
                   viewGeneration.graphFormatter(dataCounted['userAgent']),
                   viewGeneration.graphFormatter(dataCounted['awsRegion'])
-                  ]})
+                    ]})
 
 
 def full_results(request):

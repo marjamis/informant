@@ -5,7 +5,8 @@ LABEL author "marjamis"
 COPY requirements.txt ./
 
 RUN apk add --no-cache --update && \
-    pip install --no-cache-dir -r requirements.txt
+    pip install --no-cache-dir -r requirements.txt && \
+    mkdir -p /var/www/localhost/htdocs/searches
 
 
 COPY ./configurations/wsgi.conf /etc/apache2/conf.d/
