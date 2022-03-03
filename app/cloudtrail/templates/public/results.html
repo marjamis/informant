@@ -1,0 +1,209 @@
+{% load staticfiles %}
+
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Informant</title>
+    {# Load CSS and JavaScript #}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {# Display django.contrib.messages as Bootstrap alerts #}
+    {% bootstrap_messages %}
+    <!-- Custom CSS -->
+    <link href="{% static 'public/dist/css/sb-admin-2.css' %}" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="{% static 'public/bower_components/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+    <!--Custom Styles-->
+    <link href="{% static 'public/css/custom_style.css' %}" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="{% static 'public/bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'public/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <!-- Custom JS for displaying data-->
+    <script src="{% static 'public/js/custom.js' %}"></script>
+    <!-- Flot Charts JavaScript -->
+    <script src="{% static 'public/bower_components/flot/excanvas.min.js' %}"></script>
+    <script src="{% static 'public/bower_components/flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'public/bower_components/flot/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'public/bower_components/flot/jquery.flot.resize.js' %}"></script>
+    <script src="{% static 'public/bower_components/flot/jquery.flot.time.js' %}"></script>
+    <script src="{% static 'public/bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js' %}"></script>
+    <!-- Tablesort Theme-->
+    <link href="{% static 'public/tablesorter/theme.bootstrap.css' %}" rel="stylesheet">
+    <!-- Tablesorter -->
+    <script src="{% static 'public/tablesorter/jquery.tablesorter.combined.js' %}"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- Navigation -->
+      <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">marjamis@informant</a>
+        </div>
+        <!-- /.navbar-header -->
+        <!-- /.navbar-top-links -->
+        <div class="navbar-default sidebar" role="navigation">
+          <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+              <li>
+                <a href="/"><i class="fa fa-dashboard fa-fw"></i>Index</a>
+              </li>
+            </ul>
+          </div>
+          <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+      </nav>
+      <div id="page-wrapper">
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 class="page-header">Processed data</h1>
+          </div>
+        </div>
+        <!-- /.row -->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                Details
+              </div>
+              <!-- /.panel-heading -->
+              <dl>
+                <dt>Search Key:</dt>
+                <dd>{{details.searchKey}}</dd>
+                <dt>Account:</dt>
+                <dd>{{details.account}}</dd>
+                <dt>Location:</dt>
+                <dd>{{details.location}}</dd>
+                <dt>Date run:</dt>
+                <dd>{{details.dateRun}}</dd>
+                <dt>Date for:</dt>
+                <dd>{{details.dateFor}}</dd>
+              </dl>
+              <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+          </div>
+          <!-- /.panel -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                Breakdown of Specific API calls
+              </div>
+              <!-- /.panel-heading -->
+              <div class="panel-body">
+                <div class="flot-chart">
+                  <div class="flot-chart-content" id="flot-pie-chart0"></div>
+                </div>
+              </div>
+              <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+          </div>
+          <div class="col-lg-6">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                Breakdown of Event Sources
+              </div>
+              <!-- /.panel-heading -->
+              <div class="panel-body">
+                <div class="flot-chart">
+                  <div class="flot-chart-content" id="flot-pie-chart1"></div>
+                </div>
+              </div>
+              <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+          </div>
+        </div>
+        <!-- /.row -->
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                Breakdown of User Agents
+              </div>
+              <!-- /.panel-heading -->
+              <div class="panel-body">
+                <div class="flot-chart">
+                  <div class="flot-chart-content" id="flot-pie-chart2"></div>
+                </div>
+              </div>
+              <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+          </div>
+          <div class="col-lg-6">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                Breakdown of Regions
+              </div>
+              <!-- /.panel-heading -->
+              <div class="panel-body">
+                <div class="flot-chart">
+                  <div class="flot-chart-content" id="flot-pie-chart3"></div>
+                </div>
+              </div>
+              <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+          </div>
+          <!-- /.panel -->
+        </div>
+        <div class="col-lg-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              Table of API calls
+            </div>
+            <div class="panel-body">
+              <table class="table table-striped table-condensed tablesorter">
+                <thead>
+                  <tr>
+                    {% for value in subset_headers %}
+                    <th>{{value}}</th>
+                    {% endfor %}
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for value in subset_calls %}
+                  <tr>
+                    {% for cell in value %}
+                    <td>{{cell}}</td>
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              Click <a href="/full_results/?prev={{details.searchKey}}">here</a> for full details on each call or <a href="/raw_data/?prev={{details.searchKey}}"> here</a> for the raw json
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Flow Charts Data-->
+    <script> 
+      {% autoescape off %}
+      {% for value in pieData %}
+        pieChartCreator({{value}}, "#flot-pie-chart{{forloop.counter0}}");
+      {% endfor %}
+      {% endautoescape %}
+    </script>
+  </body>
+</html>
+
