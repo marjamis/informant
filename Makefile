@@ -17,6 +17,9 @@ build: ## Builds the application
 
 test: build ## Builds and then runs tests against the application
 
+genData: ## Generate the test data
+	cd tests; cp example_cloud_trails.json /tmp/ && gzip /tmp/example_cloud_trails.json && cd /tmp && tar cvf /tmp/example_cloud_trails.tar example_cloud_trails.json.gz && gzip /tmp/example_cloud_trails.tar && cp /tmp/example_cloud_trails.tar.gz ~
+
 prod: ## Runs the prod version of the application
 	docker run -dit -e ENV=prod --network=host $(IMAGE)
 
